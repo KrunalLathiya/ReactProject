@@ -1,0 +1,35 @@
+.bg-dark {
+    background-color: #242526 !important;
+    /* Dark mode background */
+}
+
+.nav-link {
+    color: #adb5bd;
+    /* Subtle grey text color */
+}
+
+.nav-link:hover,
+.nav-link.active,
+.dropdown-toggle:hover,
+.dropdown-toggle:focus {
+    background-color: #495057;
+    /* Dark grey hover background */
+    color: #ffffff;
+    /* White text on hover */
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+    /* Light grey for hover */
+}
+
+.table {
+    border-collapse: separate;
+    border-spacing: 0 0.5em;
+}
+
+.table td,
+.table th {
+    vertical-align: middle;
+    /* Center align table cell contents */
+}
