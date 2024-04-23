@@ -6,7 +6,7 @@ import { useEditBusiness } from '../hooks/useEditBusiness';
 function Edit() {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { formData, setFormData, updateData, isLoading, errors, validateField } = useEditBusiness(id);
+    const { formData, setFormData, updateData, errors, validateField } = useEditBusiness(id);
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -16,7 +16,6 @@ function Edit() {
         }
     };
 
-    if (isLoading) return <p>Loading...</p>;
     if (errors.general) return <p className="text-danger">{errors.general}</p>;
 
     return (

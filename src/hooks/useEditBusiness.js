@@ -9,10 +9,8 @@ export function useEditBusiness(id) {
         business_image: ''
     });
     const [errors, setErrors] = useState({});
-    const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {
-        setLoading(true);
         fetchBusinessById(id).then(data => {
             setFormData({
                 person_name: data.person_name,
@@ -20,10 +18,8 @@ export function useEditBusiness(id) {
                 gst_number: data.gst_number,
                 business_image: data.business_image
             });
-            setLoading(false);
         }).catch(error => {
             setErrors({ general: 'Failed to fetch business data' });
-            setLoading(false);
         });
     }, [id]);
 
@@ -34,7 +30,13 @@ export function useEditBusiness(id) {
         } else if (name === 'gst_number' && !/^[0-9A-Za-z]+$/.test(value)) {
             msg = 'GST number must be alphanumeric.';
         }
-
+        if (name === 'business_image') { // Specific checks for 'business_image'
+            // Check if the file is of an allowed type by inspecting the MIME type
+            const validTypes = ['image/png', 'image/jpeg'];
+            if (!validTypes.includes(value.type)) {
+                msg = 'Only PNG or JPG files are allowed.';
+            }
+        }
         setErrors(prevErrors => ({
             ...prevErrors,
             [name]: msg
@@ -55,17 +57,14 @@ export function useEditBusiness(id) {
             return false;
         }
 
-        setLoading(true);
         try {
             await updateBusiness(id, data);
-            setLoading(false);
             return true;
         } catch (error) {
             setErrors({ general: 'Error updating data' });
-            setLoading(false);
             return false;
         }
     };
 
-    return { formData, setFormData, updateData, errors, validateField, isLoading };
+    return { formData, setFormData, updateData, errors, validateField };
 }
