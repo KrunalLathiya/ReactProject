@@ -33,3 +33,7 @@
     vertical-align: middle;
     /* Center align table cell contents */
 }
+.custom-quill .ql-editor {
+    height: 200px; /* or any height you prefer */
+    width: 100%; /* or any specific width */
+  }

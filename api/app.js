@@ -1,7 +1,9 @@
 const express = require('express');
 const cors = require('cors');
-const businessRoutes = require('./businessRoutes');
 const path = require("path");
+
+const userRoutes = require('./routes/userRoutes');
+const businessRoutes = require('./routes/businessRoutes');
 
 function createApp() {
     const app = express();
@@ -12,6 +14,7 @@ function createApp() {
     app.use(express.json());
     // Use the business routes in the application
     app.use('/business', businessRoutes);
+    app.use('/auth', userRoutes);
 
     return app;
 }

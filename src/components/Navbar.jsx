@@ -1,7 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useAuth } from './useAuth.jsx';  // Ensure this path is correct
 
 function Navbar() {
+    const { isAuthenticated, logout } = useAuth();  // Destructure isAuthenticated from the useAuth hook
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
@@ -11,12 +14,23 @@ function Navbar() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/profile">Profile</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/settings">Settings</NavLink>
-                        </li>
+                        {/* Only show Signup and Login links if the user is not authenticated */}
+                        {!isAuthenticated && (
+                            <>
+                                <li className="nav-item">
+                                    <NavLink className="nav-link" to="/signup">Signup</NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className="nav-link" to="/login">Login</NavLink>
+                                </li>
+                            </>
+                        )}
+                        {/* Only show Logout button if the user is authenticated */}
+                        {isAuthenticated && (
+                            <li className="nav-item">
+                                <button className="nav-link btn btn-link" style={{ color: 'rgba(255,255,255,.55)' }} onClick={logout}>Logout</button>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </div>

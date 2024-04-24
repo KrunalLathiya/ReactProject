@@ -1,6 +1,8 @@
 import React from 'react';
 import FormInput from './FormInput';
 import FormFile from './FormFile';
+import ReactQuill from 'react-quill'; // Import react-quill
+import 'react-quill/dist/quill.snow.css'; // Include the Quill stylesheet
 
 function BusinessForm({ formData, setFormData, onSubmit, errors, validateField }) {
     const handleChange = (e) => {
@@ -23,6 +25,13 @@ function BusinessForm({ formData, setFormData, onSubmit, errors, validateField }
         } else {
             validateField('business_image', null);
         }
+    };
+    const handleDescriptionChange = (value) => {
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            description: value
+        }));
+        validateField('description', value);
     };
 
     return (
@@ -57,6 +66,15 @@ function BusinessForm({ formData, setFormData, onSubmit, errors, validateField }
                 name="business_image"
                 error={errors.business_image}
             />
+            <div className="mb-3">
+                <label className="form-label">Description:</label>
+                <ReactQuill
+                    className="custom-quill"
+                    theme="snow"
+                    value={formData.description || ''}
+                    onChange={handleDescriptionChange}
+                />
+            </div>
             <button type="submit" className="btn btn-primary">Submit</button>
         </form>
     );

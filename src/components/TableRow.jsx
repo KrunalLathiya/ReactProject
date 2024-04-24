@@ -1,11 +1,12 @@
 import React, { useState, memo } from 'react';
 import { Link } from 'react-router-dom';
-import ConfirmationModal from './ConfirmationModal';
 
 const TableRow = memo(({ business, deleteItem, downloadPdf }) => {
     const [showModal, setShowModal] = useState(false);
 
-    const handleDeleteClick = () => setShowModal(true);
+    const handleDeleteClick = () => {
+        setShowModal(true);
+    };
 
     const handleConfirmDelete = async () => {
         await deleteItem(business._id);
@@ -40,5 +41,25 @@ const TableRow = memo(({ business, deleteItem, downloadPdf }) => {
         </tr>
     );
 });
+
+const ConfirmationModal = ({ onClose, onConfirm }) => (
+    <div className="modal fade show" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }} aria-modal="true" role="dialog">
+        <div className="modal-dialog">
+            <div className="modal-content">
+                <div className="modal-header">
+                    <h5 className="modal-title">Confirmation</h5>
+                    <button type="button" className="btn-close" onClick={onClose} aria-label="Close"></button>
+                </div>
+                <div className="modal-body">
+                    <p>Are you sure you want to delete this item?</p>
+                </div>
+                <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" onClick={onClose}>Cancel</button>
+                    <button type="button" className="btn btn-danger" onClick={onConfirm}>Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+);
 
 export default TableRow;
