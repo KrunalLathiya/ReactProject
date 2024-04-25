@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { registerUser } from '../services/userService';
+import { useAuth } from '../components/useAuth';
 
 export function useSignUp() {
     const [generalError, setGeneralError] = useState('');
+    const { login } = useAuth();
 
     const submitData = async (formData) => {
         try {
             const result = await registerUser(formData);
             if (result.data.success) {
-                localStorage.setItem("token", result.data.token);
+                login(result.data.token);
                 return true; // Indicate success
             } else {
                 setGeneralError('Registration failed.'); // Handle failure (e.g., invalid data)

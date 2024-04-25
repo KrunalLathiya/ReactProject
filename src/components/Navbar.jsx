@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useAuth } from './useAuth.jsx';  // Ensure this path is correct
+import { useAuth } from './useAuth.jsx';
 
 function Navbar() {
-    const { isAuthenticated, logout } = useAuth();  // Destructure isAuthenticated from the useAuth hook
+    const { isAuthenticated, logout } = useAuth();
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">

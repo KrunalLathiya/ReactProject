@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
     const login = (token) => {
         localStorage.setItem('token', token);
         setIsAuthenticated(true);
-        navigate('/'); // Navigate to home or dashboard upon login
+        return true;
     };
 
     const logout = () => {

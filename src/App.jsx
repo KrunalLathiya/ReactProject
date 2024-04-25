@@ -29,8 +29,8 @@ function App() {
             <Route path="/create" element={<ProtectedRoute component={Create} isAuthenticated={isAuthenticated} />} />
             <Route path="/edit/:id" element={<ProtectedRoute component={Edit} isAuthenticated={isAuthenticated} />} />
             <Route path="/index" element={<ProtectedRoute component={Index} isAuthenticated={isAuthenticated} />} />
-            <Route path="/signup" element={<SignUpForm />} />
-            <Route path="/login" element={<LoginForm />} />
+            <Route path="/signup" element={<ProtectedRoute component={SignUpForm} isAuthenticated={isAuthenticated} redirectPath="/index" />} />
+            <Route path="/login" element={<ProtectedRoute component={LoginForm} isAuthenticated={isAuthenticated} redirectPath="/index" />} />
           </Routes>
         </div>
       </div>
